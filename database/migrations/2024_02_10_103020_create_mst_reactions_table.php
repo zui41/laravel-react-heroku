@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('mst_reactions', function (Blueprint $table) {
             $table->id();
+            $table->string('reaction');
             $table->timestamps();
         });
     }
