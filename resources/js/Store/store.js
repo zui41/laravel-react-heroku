@@ -8,6 +8,4 @@ const store = configureStore({
     // Add other reducers as needed
   },
 });
-store.dispatch(setAuth({ user: "satoshi" }));
-
 export default store;

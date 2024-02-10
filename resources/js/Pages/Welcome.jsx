@@ -1,13 +1,12 @@
 import styled from 'styled-components';
 import { Link, Head } from '@inertiajs/react';
-import { Route, Routes } from 'react-router-dom';
 import { useEffect, useState } from 'react'; // useStateを追加
 import GroupComponent from '@/Components/Group/GroupComponent';
 import ThemeComponent from '@/Components/Theme/ThemeComponent';
-import ThreadComponent from '@/Components/Thread/ThreadComponent';
 import store from '@/Store/store';
 import { setAuth } from '@/Store/authSlice';
 import { useDispatch } from 'react-redux';
+import GroupCardComponent from '@/Components/Group/GroupCardComponent';
 
 const GroupThemeContainer = styled.div`
     width: 100%;
@@ -63,7 +62,7 @@ export default function Welcome({ auth }) {
 
     useEffect(() => {
         // setAuthアクションをディスパッチ
-        dispatch(setAuth({ user: 'satoshi' }));
+        dispatch(setAuth({ user: 'satoshi'  ,id:1}));
     }, [dispatch]);
 
     // Reduxの非同期更新を待つためにuseEffect内でユーザーを更新
@@ -81,11 +80,13 @@ export default function Welcome({ auth }) {
                     <Header className="sm:fixed sm:top-0 sm:right-0 p-6 text-end">
                         {user ? (
                             <WelcomeLink
-                                href={route('dashboard')}
-                                className="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
-                            >
-                                Dashboard
-                            </WelcomeLink>
+                            key={user.id}
+                            className="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
+                            href={`/user/${user.id}`}
+                        >
+                            {user.user}
+                        </WelcomeLink>
+                            
                         ) : (
                             <>
                                 <WelcomeLink
@@ -109,23 +110,7 @@ export default function Welcome({ auth }) {
                             <GroupComponent />
                         </GroupContainer>
                         <ThemeContainer>
-                            <Routes>
-                                {/* Static sidebar for GroupComponent */}
-                                <Route
-                                    path="/group/:groupId/*"
-                                    element={<GroupComponent />}
-                                />
-
-                                {/* Dynamic main content based on the route */}
-                                <Route
-                                    index
-                                    element={<ThemeComponent groupId={groupId} />}
-                                />
-                                <Route
-                                    path="/theme/:themeId"
-                                    element={<ThreadComponent />}
-                                />
-                            </Routes>
+                            <ThemeComponent groupId={groupId}/>
                         </ThemeContainer>
                     </GroupThemeContainer>
                 </WelcomeContent>
