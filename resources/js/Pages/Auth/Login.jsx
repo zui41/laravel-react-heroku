@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect , useState} from 'react';
 import Checkbox from '@/Components/Checkbox';
 import GuestLayout from '@/Layouts/GuestLayout';
 import InputError from '@/Components/InputError';
@@ -7,6 +7,11 @@ import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import { Head, Link, useForm } from '@inertiajs/react';
 import styled from 'styled-components';
+import axios from 'axios'; // axiosをインポート
+import { setAuth } from '@/Store/authSlice';
+import { useDispatch } from 'react-redux';
+import store from '@/Store/store';
+
 
 // スタイルドコンポーネント
 const StatusMessage = styled.div`
@@ -55,16 +60,34 @@ export default function Login({ status, canResetPassword }) {
     password: '',
     remember: false,
   });
-
+  const dispatch = useDispatch(); 
+  const [user, setUser] = useState({}); // useStateを使用
+  
   useEffect(() => {
     return () => {
       reset('password');
     };
   }, []);
 
-  const submit = (e) => {
+  const submit = async(e) => {
     e.preventDefault();
-    post(route('login'));
+    try {
+      const response = await axios.post('/api/login', data);
+
+      if (!response.data) {
+        throw new Error('Invalid response format');
+      }
+      if (response.status !=201){
+        throw new Error('Fuck');
+      }  else{
+        setUser(response.data);
+        dispatch(setAuth(response.data));
+        console.log('no fuck');
+        console.log(store.getState().auth.user);
+      }
+    } catch (error) {
+      console.error('Error:', error.message);
+    }
   };
 
   return (
@@ -73,7 +96,7 @@ export default function Login({ status, canResetPassword }) {
 
       {status && <StatusMessage>{status}</StatusMessage>}
 
-      <LoginForm onSubmit={submit}>
+      <LoginForm onSubmit={submit} id='loginForm'>
         {/* Input for Email */}
         <LabelContainer>
           <InputLabel htmlFor="email" value="Email" />

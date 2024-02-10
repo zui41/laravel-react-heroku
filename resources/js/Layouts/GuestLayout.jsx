@@ -50,9 +50,9 @@ export default function Guest({ children }) {
     return (
         <Container>
             <LoginForm>
-                <Png>
+                <Link href="/">
                     <Logo src= {LoginLogo} />
-                </Png>
+                </Link>
             <FormCard >
                 {children}
             </FormCard>
