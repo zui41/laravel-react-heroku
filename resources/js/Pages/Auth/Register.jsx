@@ -9,8 +9,11 @@ import { Head, Link, useForm } from '@inertiajs/react';
 import { useDispatch } from 'react-redux';
 import { setAuth } from '@/Store/authSlice';
 import store from '@/Store/store';
+import { useNavigate } from "react-router-dom";
+
 
 export default function Register() {
+    const navigate = useNavigate();
     const { data, setData, post, processing, errors, reset } = useForm({
         name: '',
         email: '',
@@ -38,8 +41,7 @@ export default function Register() {
         } else{
             setUser(response.data);
             dispatch(setAuth(response.data));
-            console.log(store.getState().auth.user);
-            console.log(response.data);
+            navigate("/home");    
         }
         }catch (error){
             console.error('Error', error.message)
