@@ -1,41 +1,97 @@
+import styled from 'styled-components';
 import { Link, Head } from '@inertiajs/react';
+import GroupComponent from '@/Components/Group/GroupComponent';
+import ThemeComponent from '@/Components/Theme/ThemeComponent';
 
-export default function Welcome({ auth, laravelVersion, phpVersion }) {
+const GroupThemeContainer = styled.div`
+    width: 100%;
+    height: 85%;
+    display: flex;
+    flex-direction: row;
+`;
+
+const GroupContainer = styled.div`
+    width: 10%;
+    height: 100vh;
+    color: white;
+    background-color: #333;
+`;
+
+const ThemeContainer = styled.div`
+    width: 90%;
+    height: 100vh;
+    color: white;
+    overflow-y: auto; /* スクロールを追加 */
+    margin:0 3%;
+`;
+
+const WelcomeContainer = styled.div`
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+`;
+
+const WelcomeContent = styled.div`
+    width:100%;
+    height:100%;
+    z-index: 1;
+`;
+
+const WelcomeLink = styled(Link)`
+    font-weight: 600;
+    color: #4a5568;
+    &:hover {
+        color: #2d3748;
+    }
+`;
+
+const Header = styled.div`
+    height:15%;
+`
+export default function Welcome({ auth }) {
     return (
         <>
             <Head title="Welcome" />
-            <div className="relative sm:flex sm:justify-center sm:items-center min-h-screen bg-dots-darker bg-center bg-gray-100 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white">
-                <div className="sm:fixed sm:top-0 sm:right-0 p-6 text-end">
-                    {auth.user ? (
-                        <Link
-                            href={route('dashboard')}
-                            className="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
-                        >
-                            Dashboard
-                        </Link>
-                    ) : (
-                        <>
-                            <Link
-                                href={route('login')}
+            <WelcomeContainer>
+                <WelcomeContent className=" sm:justify-center sm:items-center">
+                    <Header className="sm:fixed sm:top-0 sm:right-0 p-6 text-end">
+                        {auth.user ? (
+                            <WelcomeLink
+                                href={route('dashboard')}
                                 className="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
                             >
-                                Log in
-                            </Link>
+                                Dashboard
+                            </WelcomeLink>
+                        ) : (
+                            <>
+                                <WelcomeLink
+                                    href={route('login')}
+                                    className="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
+                                >
+                                    Log in
+                                </WelcomeLink>
 
-                            <Link
-                                href={route('register')}
-                                className="ms-4 font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
-                            >
-                                Register
-                            </Link>
-                        </>
-                    )}
-                </div>
-
-                <div className="max-w-7xl mx-auto p-6 lg:p-8">
-                    
-                </div>
-            </div>
+                                <WelcomeLink
+                                    href={route('register')}
+                                    className="ms-4 font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
+                                >
+                                    Register
+                                </WelcomeLink>
+                            </>
+                        )}
+                    </Header>
+                    <GroupThemeContainer>
+                        <GroupContainer>
+                            <GroupComponent />
+                        </GroupContainer>
+                        <ThemeContainer>
+                            <ThemeComponent />
+                        </ThemeContainer>
+                    </GroupThemeContainer>
+                </WelcomeContent>
+            </WelcomeContainer>
         </>
     );
 }
