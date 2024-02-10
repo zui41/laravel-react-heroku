@@ -25,7 +25,7 @@ use App\Http\Controllers\ReactionController;
 Route::post('/register', [AuthController::class, 'register'])->name("api.refister");
 Route::post('/login', [AuthController::class, 'login'])->name("api.login");
 
-Route::middleware('auth:sanctum')->group(function() {
+// Route::middleware('auth:sanctum')->group(function() {
     Route::post('/logout', [AuthController::class, 'logout']);
 
     Route::group(['prefix' => 'user', 'as' => 'user.'], function () {
@@ -34,7 +34,7 @@ Route::middleware('auth:sanctum')->group(function() {
     });
 
     Route::group(['prefix' => 'group', 'as' => 'group.'], function () {
-        Route::get('/index', [GroupController::class, 'index']);
+        Route::post('/index', [GroupController::class, 'index']);
         Route::post('/store', [GroupController::class, 'store']);
         Route::get('/detail', [GroupController::class, 'detail']);
         Route::post('/update', [GroupController::class, 'update']);
@@ -42,7 +42,7 @@ Route::middleware('auth:sanctum')->group(function() {
     });
 
     Route::group(['prefix' => 'post', 'as' => 'post.'], function () {
-        Route::get('/index', [PostController::class, 'index']);
+        Route::post('/index', [PostController::class, 'index']);
         Route::post('/store', [PostController::class, 'store']);
         Route::get('/detail', [PostController::class, 'detail']);
         Route::post('/update', [PostController::class, 'update']);
@@ -50,7 +50,7 @@ Route::middleware('auth:sanctum')->group(function() {
     });
 
     Route::group(['prefix' => 'theme', 'as' => 'theme.'], function () {
-        Route::get('/index', [ThemeController::class, 'index']);
+        Route::post('/index', [ThemeController::class, 'index']);
         Route::post('/store', [ThemeController::class, 'store']);
         Route::post('/update', [ThemeController::class, 'update']);
         Route::post('/delete', [ThemeController::class, 'delete']);
@@ -68,4 +68,4 @@ Route::middleware('auth:sanctum')->group(function() {
         Route::post('/store', [ReactionController::class, 'store']);
         Route::post('/delete', [ReactionController::class, 'delete']);
     });
-});
+// });

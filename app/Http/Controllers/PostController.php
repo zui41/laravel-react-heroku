@@ -14,13 +14,13 @@ class PostController extends Controller
      * Show all post informations.
      *
      */
-    public function index(Request $request): Response
+    public function index(Request $request)
     {
         try {
-            $posts = Post::where('theme_id', $request->theme_id)
-                        ->postImages()
-                        ->comments()
-                        ->reactions()
+            $posts = Post::where('theme_id', $request->id)
+                        // ->postImages()
+                        // ->comments()
+                        // ->reactions()
                         ->orderBy('created_at', 'desc')->get();
 
             return response()->json($posts, 200);

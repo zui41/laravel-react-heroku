@@ -7,8 +7,9 @@ import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import store from './Store/store'; // Redux storeのインポート
-import ThemeComponent from './Components/Theme/ThemeComponent';
 import ThreadComponent from './Components/Thread/ThreadComponent';
+import ThemeMain from './Pages/ThemeMain';
+import ThreadMain from './Pages/ThreadMain';
 import  UserSetting  from './Components/UserSetting/UserSetting';
 
 
@@ -29,8 +30,8 @@ createInertiaApp({
                         <Routes>
                             <Route path="*" element={<App {...props} />} />
                             <Route path="/home" element={<Home.default />} />
-                            <Route path="/group/:groupId" element={<ThemeComponent />} />
-                            <Route path="/theme/:thmeId" element={<ThreadComponent />} />
+                            <Route path="/group/:groupId" element={<ThemeMain />} />
+                            <Route path="/theme/:thmeId" element={<ThreadMain />} />
                             <Route path="/users/userSetting" element={<UserSetting />} />
                         </Routes>
                     </Router>

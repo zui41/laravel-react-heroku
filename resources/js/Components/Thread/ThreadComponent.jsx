@@ -18,7 +18,7 @@ const CardContainer = styled.div`
     background-color: white;
 `;
 
-const ThreadCardComponent = () => {
+const ThreadCardComponent = ({thread}) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedThreadId, setSelectedThreadId] = useState(null);
     const [selectedThreadContent, setSelectedThreadContent] = useState(null);

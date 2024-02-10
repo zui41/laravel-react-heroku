@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { Link, Head } from '@inertiajs/react';
+import { Route, Routes } from 'react-router-dom';
 import { useEffect, useState } from 'react'; // useStateを追加
 import GroupComponent from '@/Components/Group/GroupComponent';
 import ThemeComponent from '@/Components/Theme/ThemeComponent';
@@ -9,8 +10,7 @@ import store from '@/Store/store';
 import { setAuth } from '@/Store/authSlice';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from "react-router-dom";
-import { Link } from 'react-router-dom';
-
+import { useLocation } from 'react-router-dom';
 
 const GroupThemeContainer = styled.div`
     width: 100%;
@@ -26,7 +26,7 @@ const GroupContainer = styled.div`
     background-color: #333;
 `;
 
-const ThemeContainer = styled.div`
+const HomeContainer = styled.div`
     width: 90%;
     height: 100vh;
     color: white;
@@ -34,7 +34,7 @@ const ThemeContainer = styled.div`
     margin: 0 3%;
 `;
 
-const HomeContainer = styled.div`
+const ThemeContainer = styled.div`
     min-height: 100vh;
     display: flex;
     justify-content: center;
@@ -42,13 +42,13 @@ const HomeContainer = styled.div`
     text-align: center;
 `;
 
-const HomeContent = styled.div`
+const ThemeContent = styled.div`
     width: 100%;
     height: 100%;
     z-index: 1;
 `;
 
-const HomeLink = styled(Link)`
+const ThemeLink = styled(Link)`
     font-weight: 600;
     color: #4a5568;
     &:hover {
@@ -60,11 +60,12 @@ const Header = styled.div`
     height: 15%;
 `;
 
-function Home() {
-    const dispatch = useDispatch();
+function ThemeMain() {
+    const location = useLocation();
     const [user, setUser] = useState({}); // useStateを使用
     const [groups , setGroups] = useState([]);
-
+    const [themes , setThemes] = useState([]);
+    const [groupId , setGroupId] = useState({id:1});
     // Reduxの非同期更新を待つためにuseEffect内でユーザーを更新
     useEffect(() => {
         setUser(store.getState().auth.user);
@@ -73,38 +74,38 @@ function Home() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.post('/api/group/index', store.getState().auth.user);
-                // データをここで取り出すか、別の関数に渡して処理を行います
-                setGroups(response.data.id);
+                if(groupId.id > 0){
+                    const response = await axios.post('/api/group/index', store.getState().auth.user);
+                    // データをここで取り出すか、別の関数に渡して処理を行います
+                    const themeResponse = await axios.post('/api/theme/index' , groupId);
+                    setGroups(response.data.id);
+                    setThemes(themeResponse.data);
+                }
             } catch (error) {
                 console.error(error);
             }
         }
         fetchData();
       }, []);
-
-    const groupId = 1;
-
     return (
-            <HomeContainer>
-                <HomeContent className="sm:justify-center sm:items-center">
+            <ThemeContainer>
+                <ThemeContent className="sm:justify-center sm:items-center">
                     <Header className="sm:fixed sm:top-0 sm:right-0 p-6 text-end">
-                               
-                            <Link to='/users/userSetting' >
-                                 {user.name}  
-                            </Link>   
+                            <div>
+                                {user.name}
+                            </div>      
                     </Header>
                     <GroupThemeContainer>
                         <GroupContainer>
                             <GroupComponent groups={groups}/>
                         </GroupContainer>
-                        <ThemeContainer>
-                         
-                        </ThemeContainer>
+                        <HomeContainer>
+                            <ThemeComponent  themes={themes}/>
+                        </HomeContainer>
                     </GroupThemeContainer>
-                </HomeContent>
-            </HomeContainer>
+                </ThemeContent>
+            </ThemeContainer>
     );
 }
 
-export default Home;
+export default ThemeMain;
