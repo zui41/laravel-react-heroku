@@ -96,6 +96,7 @@ export default function Login({ status, canResetPassword }) {
 
       {status && <StatusMessage>{status}</StatusMessage>}
 
+
       <LoginForm onSubmit={submit} id='loginForm'>
         {/* Input for Email */}
         <LabelContainer>
@@ -111,6 +112,7 @@ export default function Login({ status, canResetPassword }) {
           />
           <InputError message={errors.email} />
         </LabelContainer>
+
 
         {/* Input for Password */}
         <LabelContainer>
