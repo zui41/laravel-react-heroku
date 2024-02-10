@@ -1,6 +1,10 @@
+import styled from "styled-components";
+const Input =styled.input`
+    margin-right: 5px;
+`
 export default function Checkbox({ className = '', ...props }) {
     return (
-        <input
+        <Input
             {...props}
             type="checkbox"
             className={
