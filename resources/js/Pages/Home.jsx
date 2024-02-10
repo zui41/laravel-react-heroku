@@ -62,11 +62,25 @@ const Header = styled.div`
 function Home() {
     const dispatch = useDispatch();
     const [user, setUser] = useState({}); // useStateを使用
+    const [groups , setGroups] = useState([]);
 
     // Reduxの非同期更新を待つためにuseEffect内でユーザーを更新
     useEffect(() => {
         setUser(store.getState().auth.user);
     }, [store.getState().auth.user]);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await axios.post('/api/group/index', store.getState().auth.user);
+                // データをここで取り出すか、別の関数に渡して処理を行います
+                setGroups(response.data.id);
+            } catch (error) {
+                console.error(error);
+            }
+        }
+        fetchData();
+      }, []);
 
     const groupId = 1;
 
@@ -75,12 +89,12 @@ function Home() {
                 <HomeContent className="sm:justify-center sm:items-center">
                     <Header className="sm:fixed sm:top-0 sm:right-0 p-6 text-end">
                             <div>
-                                Dashboard
+                                {user.name}
                             </div>      
                     </Header>
                     <GroupThemeContainer>
                         <GroupContainer>
-                            <GroupComponent />
+                            <GroupComponent groups={groups}/>
                         </GroupContainer>
                         <ThemeContainer>
                          
