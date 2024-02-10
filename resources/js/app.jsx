@@ -20,13 +20,13 @@ createInertiaApp({
         const root = createRoot(el);
 
         // Welcome.jsxを動的にインポート
-        import('./Pages/Welcome').then((Welcome) => {
+        import('./Pages/Home').then((Home) => {
             root.render(
                 <Provider store={store}> {/* ReduxのProviderでアプリケーションをラップ */}
                     <Router>
                         <Routes>
                             <Route path="*" element={<App {...props} />} />
-                            <Route path="/home" element={<Welcome.default />} />
+                            <Route path="/home" element={<Home.default />} />
                             <Route path="/group/:groupId" element={<ThemeComponent />} />
                             <Route path="/theme/:thmeId" element={<ThreadComponent />} />
                         </Routes>

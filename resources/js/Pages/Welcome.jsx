@@ -126,9 +126,6 @@ export default function Login({ status, canResetPassword }) {
               パスワードを忘れてしまいましたか？
             </LinkStyled>
           )}
-           <Link key={1}  href={'/home'}> 
-                group 
-           </Link>
           <Link href={route('register')} className="font-semibold" >
               <PrimaryButton>新規登録はこちらから</PrimaryButton>
           </Link>
