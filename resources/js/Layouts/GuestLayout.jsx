@@ -1,18 +1,62 @@
 import ApplicationLogo from '@/Components/ApplicationLogo';
 import { Link } from '@inertiajs/react';
+import styled from 'styled-components';
+import LoginLogo from '../Components/tenshi.png';
+
+const Container = styled.div`
+    display:flex;
+    flex-direction:column;
+    background-color:#ccffcc;
+    align-items:center;
+    height:100%;
+    width: 100%;
+    justify-content: center;
+`
+const LoginForm = styled.div`
+    flex-direction:column;
+    display:flex;
+    align-items:center;
+    color:red;
+    margin-top: 20px;
+    width: 50%;
+    height: 100vh;
+`
+const Logo = styled.img`
+    width: 120px;
+    height: 100px;
+`
+const FormBack = styled.div`
+    width:full;
+    pedding:20px;
+    background:white;
+
+`
+const FormCard = styled.div`
+    width: 100%;
+    padding: 1.5rem; 
+    margin-top: 1.5rem; 
+    background-color: white; 
+    box-shadow: 4px 5px 17px -5px #777777;
+    border-radius: 10px;
+    overflow: hidden; 
+`
+const Png = styled.div`
+    heght: 60%;
+`
+
+
 
 export default function Guest({ children }) {
     return (
-        <div className="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
-            <div>
+        <Container>
+            <LoginForm>
                 <Link href="/">
-                    <ApplicationLogo className="w-20 h-20 fill-current text-gray-500" />
+                    <Logo src= {LoginLogo} />
                 </Link>
-            </div>
-
-            <div className="w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
+            <FormCard >
                 {children}
-            </div>
-        </div>
+            </FormCard>
+            </LoginForm>
+        </Container>
     );
 }
