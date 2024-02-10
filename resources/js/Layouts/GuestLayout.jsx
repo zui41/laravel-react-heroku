@@ -16,7 +16,6 @@ const LoginForm = styled.div`
     flex-direction:column;
     display:flex;
     align-items:center;
-    color:red;
     margin-top: 20px;
     width: 50%;
     height: 100vh;
