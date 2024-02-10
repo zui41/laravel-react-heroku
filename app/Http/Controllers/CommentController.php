@@ -16,7 +16,7 @@ class CommentController extends Controller
     {
         try {
             $posts = Comment::where('post_id', $request->post_id)
-                            ->orderBy('created_at', 'asc')->get();
+                            ->orderBy('created_at', 'desc')->get();
 
             return response()->json($comment, 200);
         } catch (Exception $e) {
@@ -55,7 +55,7 @@ class CommentController extends Controller
     public function update(Request $request): Response
     {
         try {
-            $comment = Comment::find($request->id)->update([
+            $comment = Comment::findOrFail($request->id)->update([
                 'content' => $request->content,
             ]);
 
@@ -75,7 +75,7 @@ class CommentController extends Controller
     public function delete(Request $request): Response
     {
         try {
-            Comment::find($request->id)->delete();
+            Comment::findOrFail($request->id)->delete();
 
             return response()->json(null, 204);
         } catch (Exception $e) {

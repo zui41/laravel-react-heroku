@@ -21,7 +21,7 @@ class PostController extends Controller
                         ->postImages()
                         ->comments()
                         ->reactions()
-                        ->orderBy('created_at', 'asc')->get();
+                        ->orderBy('created_at', 'desc')->get();
 
             return response()->json($posts, 200);
         } catch (Exception $e) {
@@ -70,7 +70,7 @@ class PostController extends Controller
     public function detail(Request $request): Response
     {
         try {
-            $post = Post::find($request->id)
+            $post = Post::findOrFail($request->id)
                         ->postImages()->comments()
                         ->reactions()->get();
 
@@ -89,7 +89,7 @@ class PostController extends Controller
     public function update(Request $request): Response
     {
         try {
-            $post = Post::find($request->id)->update([
+            $post = Post::findOrFail($request->id)->update([
                 'content' => $request->content,
             ]);
 
@@ -109,7 +109,7 @@ class PostController extends Controller
     public function delete(Request $request): Response
     {
         try {
-            Post::find($request->id)->delete();
+            Post::findOrFail($request->id)->delete();
 
             return response()->json(null, 204);
         } catch (Exception $e) {

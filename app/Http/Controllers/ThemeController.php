@@ -16,7 +16,7 @@ class ThemeController extends Controller
     {
         try {
             $themes = Theme::where('group_id', $request->group_id)
-                            ->orderBy('created_at')->get();
+                            ->orderBy('created_at', 'desc')->get();
             // TODO Postの新しい順にソートしたい
             // $themes = Theme::where('group_id', $request->group_id)
             //                 ->orderBy('created_at')->get();
@@ -57,7 +57,7 @@ class ThemeController extends Controller
     public function detail(Request $request): Response
     {
         try {
-            $theme = Theme::find($request->id);
+            $theme = Theme::findOrFail($request->id);
 
             return response()->json($theme, 200);
         } catch (Exception $e) {
@@ -74,7 +74,7 @@ class ThemeController extends Controller
     public function update(Request $request): Response
     {
         try {
-            $theme = Theme::find($request->id)->update([
+            $theme = Theme::findOrFail($request->id)->update([
                 'name' => $request->name,
             ]);
 
@@ -94,7 +94,7 @@ class ThemeController extends Controller
     public function delete(Request $request): Response
     {
         try {
-            Theme::find($request->id)->delete();
+            Theme::findOrFail($request->id)->delete();
 
             return response()->json(null, 204);
         } catch (Exception $e) {

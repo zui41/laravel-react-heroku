@@ -65,7 +65,7 @@ class GroupController extends Controller
     public function detail(Request $request): Response
     {
         try {
-            $group = Group::find($request->id);
+            $group = Group::findOrFail($request->id);
 
             return response()->json($group, 200);
         } catch (Exception $e) {
@@ -82,7 +82,7 @@ class GroupController extends Controller
     public function update(Request $request): Response
     {
         try {
-            $group = Group::find($request->id);
+            $group = Group::findOrFail($request->id);
             if ($request->file('img')) {
                 Storage::delete($group->img_path);
                 $img_path = $request->file('img')->store('group_imgs');
@@ -108,7 +108,7 @@ class GroupController extends Controller
     public function delete(Request $request): Response
     {
         try {
-            $group = Group::find($request->id);
+            $group = Group::findOrFail($request->id);
 
             $user = Auth::user();
             $user->groups()->detach($group->id);

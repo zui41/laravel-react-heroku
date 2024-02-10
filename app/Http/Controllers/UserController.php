@@ -16,7 +16,7 @@ class UserController extends Controller
     public function invite(Request $request): Response
     {
         try {
-            $user = User::find($request->user_id);
+            $user = User::findOrFail($request->user_id);
             $user->groups()->sync($request->group_id, false);
 
             return response()->json($group, 201);

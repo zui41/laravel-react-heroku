@@ -16,7 +16,7 @@ class ReactionController extends Controller
     {
         try {
             $reactions = Reaction::where('post_id', $request->post_id)
-                            ->orderBy('created_at', 'asc')->get();
+                            ->orderBy('created_at', 'desc')->get();
 
             return response()->json($reaction, 200);
         } catch (Exception $e) {
@@ -55,7 +55,7 @@ class ReactionController extends Controller
     public function delete(Request $request): Response
     {
         try {
-            Reaction::find($request->id)->delete();
+            Reaction::findOrFail($request->id)->delete();
 
             return response()->json(null, 204);
         } catch (Exception $e) {
