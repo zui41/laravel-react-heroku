@@ -10,6 +10,7 @@ import store from './Store/store'; // Redux storeのインポート
 import ThemeComponent from './Components/Theme/ThemeComponent';
 import ThreadComponent from './Components/Thread/ThreadComponent';
 
+
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
 
 createInertiaApp({
@@ -25,7 +26,7 @@ createInertiaApp({
                     <Router>
                         <Routes>
                             <Route path="*" element={<App {...props} />} />
-                            <Route path="/group" element={<Welcome.default />} />
+                            <Route path="/home" element={<Welcome.default />} />
                             <Route path="/group/:groupId" element={<ThemeComponent />} />
                             <Route path="/theme/:thmeId" element={<ThreadComponent />} />
                         </Routes>

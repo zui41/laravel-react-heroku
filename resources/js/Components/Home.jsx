@@ -9,6 +9,7 @@ import ThreadComponent from '@/Components/Thread/ThreadComponent';
 import store from '@/Store/store';
 import { setAuth } from '@/Store/authSlice';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from "react-router-dom";
 
 const GroupThemeContainer = styled.div`
     width: 100%;
