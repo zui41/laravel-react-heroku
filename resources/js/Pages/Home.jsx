@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Link, Head } from '@inertiajs/react';
-import { Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { useEffect, useState } from 'react'; // useStateを追加
 import GroupComponent from '@/Components/Group/GroupComponent';
 import ThemeComponent from '@/Components/Theme/ThemeComponent';
@@ -10,6 +9,8 @@ import store from '@/Store/store';
 import { setAuth } from '@/Store/authSlice';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from "react-router-dom";
+import { Link } from 'react-router-dom';
+
 
 const GroupThemeContainer = styled.div`
     width: 100%;
@@ -74,9 +75,9 @@ function Home() {
             <HomeContainer>
                 <HomeContent className="sm:justify-center sm:items-center">
                     <Header className="sm:fixed sm:top-0 sm:right-0 p-6 text-end">
-                            <div>
-                                Dashboard
-                            </div>      
+                            <Link to='/users/userSetting' >
+                                さとしでーす
+                            </Link>   
                     </Header>
                     <GroupThemeContainer>
                         <GroupContainer>
