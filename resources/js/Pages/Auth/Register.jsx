@@ -1,10 +1,14 @@
-import { useEffect } from 'react';
+import { useEffect, useState} from 'react';
 import GuestLayout from '@/Layouts/GuestLayout';
 import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
+import axios from 'axios';
 import { Head, Link, useForm } from '@inertiajs/react';
+import { useDispatch } from 'react-redux';
+import { setAuth } from '@/Store/authSlice';
+import store from '@/Store/store';
 
 export default function Register() {
     const { data, setData, post, processing, errors, reset } = useForm({
@@ -13,6 +17,8 @@ export default function Register() {
         password: '',
         password_confirmation: '',
     });
+    const dispatch = useDispatch();
+    const [user, setUser] = useState({});
 
     useEffect(() => {
         return () => {
@@ -20,20 +26,26 @@ export default function Register() {
         };
     }, []);
 
-    const submit = (e) => {
+    const submit = async(e) => {
         e.preventDefault();
-
-        post(route('api.register')).then(response => {
-            
-            const responseData = response.data;
-            
-            // JSONデータを文字列に変換してアラートに表示
-            alert(JSON.stringify(responseData));
-          
-            // もしくは、コンソールにログを表示
-            console.log(responseData);
-        });  
-    };
+        try{
+            const response = await axios.post('/api/register', data)
+        if(! response.data) {
+            throw new Error('Invalid response format');
+        }
+        if (response.status != 201){
+            throw new Error('Status error: ${response.status}');
+        } else{
+            setUser(response.data);
+            dispatch(setAuth(response.data));
+            console.log(store.getState().auth.user);
+            console.log(response.data);
+        }
+        }catch (error){
+            console.error('Error', error.message)
+        }
+        }
+   
 
     return (
         <GuestLayout>
@@ -123,4 +135,4 @@ export default function Register() {
             </form>
         </GuestLayout>
     );
-}
+ };
