@@ -16,15 +16,13 @@ const CardCotainer = styled.div`
     background-color:white;
 `;
 
-const ThemeCardComponent = ({ groupId , theme }) => {
-    const id = groupId.groupId // Avoid potential null or undefined error
+const ThemeCardComponent = ({ theme }) => {
     
     const themeId = theme.id;
     return (
         <ThemeCardContainer>
             <CardCotainer>
-                GroupId: {id} <br/>
-                ThemeId : {themeId}
+               {theme.name}
             </CardCotainer>
         </ThemeCardContainer>
     );
