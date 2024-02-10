@@ -78,7 +78,6 @@ export default function Login({ status, canResetPassword }) {
       }  else{
         setUser(response.data);
         dispatch(setAuth(response.data));
-        console.log(response.data);
         navigate("/home");
       }
     } catch (error) {
