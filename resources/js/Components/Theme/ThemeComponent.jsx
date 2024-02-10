@@ -1,6 +1,8 @@
 import React from 'react';
 import ThemeCardComponent from './ThemeCardComponent';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+
 
 const ThemeContainer = styled.div`
     display: grid;
@@ -33,7 +35,9 @@ const ThemeComponent = (groupId) => {
     return (
         <ThemeContainer>
             {themeData.map((theme) => (
-                <ThemeCardComponent key={theme.id}　groupId={groupId} /* 他のプロパティを渡す */ />
+                <Link key={theme.id} to={`/theme/${theme.id}`}>
+                    <ThemeCardComponent key={theme.id}　groupId={groupId} theme={theme}/* 他のプロパティを渡す */ />
+                </Link>
             ))}
         </ThemeContainer>
     );

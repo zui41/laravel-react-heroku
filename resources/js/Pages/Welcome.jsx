@@ -1,8 +1,10 @@
 import styled from 'styled-components';
 import { Link, Head } from '@inertiajs/react';
+import { Route, Routes } from 'react-router-dom';
+
 import GroupComponent from '@/Components/Group/GroupComponent';
 import ThemeComponent from '@/Components/Theme/ThemeComponent';
-
+import ThreadComponent from '@/Components/Thread/ThreadComponent';
 const GroupThemeContainer = styled.div`
     width: 100%;
     height: 85%;
@@ -51,48 +53,40 @@ const Header = styled.div`
     height:15%;
 `
 export default function Welcome({ auth }) {
-    const groupId = 1;
+    const groupId = 1;  // You may need to dynamically determine the groupId based on the route
+
     return (
         <>
             <Head title="Welcome" />
             <WelcomeContainer>
                 <WelcomeContent className=" sm:justify-center sm:items-center">
                     <Header className="sm:fixed sm:top-0 sm:right-0 p-6 text-end">
-                        {auth.user ? (
-                            <WelcomeLink
-                                href={route('dashboard')}
-                                className="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
-                            >
-                                Dashboard
-                            </WelcomeLink>
-                        ) : (
-                            <>
-                                <WelcomeLink
-                                    href={route('login')}
-                                    className="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
-                                >
-                                    Log in
-                                </WelcomeLink>
-
-                                <WelcomeLink
-                                    href={route('register')}
-                                    className="ms-4 font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
-                                >
-                                    Register
-                                </WelcomeLink>
-                            </>
-                        )}
+                        {/* Header content */}
                     </Header>
                     <GroupThemeContainer>
                         <GroupContainer>
                             <GroupComponent />
                         </GroupContainer>
                         <ThemeContainer>
-                            {/* ThemeComponentにgroupIdを渡す */}
-                            <ThemeComponent groupId={groupId} />
+                            <Routes>
+                                {/* Static sidebar for GroupComponent */}
+                                <Route
+                                    path="/group/:groupId/*"
+                                    element={<GroupComponent />}
+                                />
+
+                                {/* Dynamic main content based on the route */}
+                                <Route
+                                    index
+                                    element={<ThemeComponent groupId={groupId} />}
+                                />
+                                <Route
+                                    path="/theme/:themeId"
+                                    element={<ThreadComponent />}
+                                />
+                            </Routes>
                         </ThemeContainer>
                     </GroupThemeContainer>
-
                 </WelcomeContent>
             </WelcomeContainer>
         </>

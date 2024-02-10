@@ -19,7 +19,7 @@ const ThreadCardComponent = () => {
     return (
         <ThreadCardContainer>    
             <CardCotainer>     
-                Card Tittile
+                Thread
             </CardCotainer>
         </ThreadCardContainer>
     )
