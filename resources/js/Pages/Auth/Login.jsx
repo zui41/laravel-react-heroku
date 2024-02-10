@@ -10,8 +10,6 @@ import styled from 'styled-components';
 import axios from 'axios'; // axiosをインポート
 import { setAuth } from '@/Store/authSlice';
 import { useDispatch } from 'react-redux';
-import store from '@/Store/store';
-
 
 // スタイルドコンポーネント
 const StatusMessage = styled.div`
@@ -78,12 +76,10 @@ export default function Login({ status, canResetPassword }) {
         throw new Error('Invalid response format');
       }
       if (response.status !=201){
-        throw new Error('Fuck');
+        throw new Error('Error');
       }  else{
         setUser(response.data);
         dispatch(setAuth(response.data));
-        console.log('no fuck');
-        console.log(store.getState().auth.user);
       }
     } catch (error) {
       console.error('Error:', error.message);

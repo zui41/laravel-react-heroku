@@ -40,11 +40,6 @@ const FormCard = styled.div`
     border-radius: 10px;
     overflow: hidden; 
 `
-const Png = styled.div`
-    heght: 60%;
-`
-
-
 
 export default function Guest({ children }) {
     return (
