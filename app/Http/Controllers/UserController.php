@@ -27,4 +27,30 @@ class UserController extends Controller
             return response()->json(404);
         }
     }
+
+    /**
+     * Update user detail.
+     *
+     */
+    public function update(Request $request): Response
+    {
+        try {
+            $user = Auth::user();
+            if ($request->file('img')) {
+                Storage::delete($user->img_path);
+                $img_path = $request->file('img')->store('user_imgs');
+            }
+            $user->update([
+                'name' => $request->name,
+                'img_path' => $img_path,
+            ]);
+
+            return response()->json($user, 200);
+        } catch (Exception $e) {
+            DB::rollback();
+            Log::error($e);
+
+            return response()->json(404);
+        }
+    }
 }

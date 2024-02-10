@@ -41,6 +41,7 @@ class GroupController extends Controller
             if ($request->file('img')) {
                 $img_path = $request->file('img')->store('group_imgs');
             }
+
             $group = Group::create([
                 'name' => $request->name,
                 'img_path' => $img_path,
@@ -89,7 +90,7 @@ class GroupController extends Controller
             }
             $group->update([
                 'name' => $request->name,
-                'img_url' => $img_path,
+                'img_path' => $img_path,
             ]);
 
             return response()->json($group, 200);

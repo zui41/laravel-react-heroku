@@ -16,10 +16,16 @@ class AuthController extends Controller
     public function register(Request $request) {
 
         try {
+            $img_path = null;
+            if ($request->file('img')) {
+                $img_path = $request->file('img')->store('user_imgs');
+            }
+
             $user = User::create([
                 'name' => $request->name,
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
+                'img_path' => $img_path,
             ]);
 
             $token = $user->createToken('auth_token')->plainTextToken;
@@ -50,7 +56,7 @@ class AuthController extends Controller
             $token = $user->createToken('auth_token')->plainTextToken;
             $cookie = cookie('token', $token, 60 * 24);
 
-            return response()->json($user, 201)->withCookie($cookie);
+            return response()->json($user, 200)->withCookie($cookie);
         } catch (Exception $e) {
             Log::error($e);
 
