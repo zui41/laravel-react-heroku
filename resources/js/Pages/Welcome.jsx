@@ -7,12 +7,9 @@ import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import { Head, Link, useForm } from '@inertiajs/react';
 import styled from 'styled-components';
-import axios from 'axios';
+import axios from 'axios'; // axiosをインポート
 import { setAuth } from '@/Store/authSlice';
 import { useDispatch } from 'react-redux';
-import { Inertia } from '@inertiajs/inertia';
-
-
 
 // スタイルドコンポーネント
 const StatusMessage = styled.div`
@@ -83,7 +80,6 @@ export default function Login({ status, canResetPassword }) {
       }  else{
         setUser(response.data);
         dispatch(setAuth(response.data));
-        Inertia.visit('/group/1');
       }
     } catch (error) {
       console.error('Error:', error.message);
@@ -95,7 +91,6 @@ export default function Login({ status, canResetPassword }) {
       <Head title="Log in" />
 
       {status && <StatusMessage>{status}</StatusMessage>}
-
 
       <LoginForm onSubmit={submit} id='loginForm'>
         {/* Input for Email */}
@@ -112,7 +107,6 @@ export default function Login({ status, canResetPassword }) {
           />
           <InputError message={errors.email} />
         </LabelContainer>
-
 
         {/* Input for Password */}
         <LabelContainer>
