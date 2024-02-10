@@ -5,11 +5,13 @@ import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
-import { Head, Link, useForm } from '@inertiajs/react';
+import { Head, useForm } from '@inertiajs/react';
 import styled from 'styled-components';
 import axios from 'axios'; // axiosをインポート
 import { setAuth } from '@/Store/authSlice';
 import { useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 // スタイルドコンポーネント
 const StatusMessage = styled.div`
@@ -53,6 +55,7 @@ const LoginForm = styled.form`
 
 // ページコンポーネント
 export default function Login({ status, canResetPassword }) {
+  const navigate = useNavigate();
   const { data, setData, post, processing, errors, reset } = useForm({
     email: '',
     password: '',
@@ -75,11 +78,13 @@ export default function Login({ status, canResetPassword }) {
       if (!response.data) {
         throw new Error('Invalid response format');
       }
-      if (response.status !=201){
+      if (response.status !=200){
         throw new Error('Error');
       }  else{
         setUser(response.data);
         dispatch(setAuth(response.data));
+        console.log(response.data);
+        navigate("/home");
       }
     } catch (error) {
       console.error('Error:', error.message);
@@ -139,6 +144,9 @@ export default function Login({ status, canResetPassword }) {
               パスワードを忘れてしまいましたか？
             </LinkStyled>
           )}
+           <Link key={1}  to={'/home'}> 
+                group 
+           </Link>
           <PrimaryButton disabled={processing}>Log in</PrimaryButton>
         </ButtonContainer>
       </LoginForm>
