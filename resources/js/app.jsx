@@ -7,8 +7,8 @@ import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import store from './Store/store'; // Redux storeのインポート
-import ThemeComponent from './Components/Theme/ThemeComponent';
 import ThreadComponent from './Components/Thread/ThreadComponent';
+import ThemeMain from './Pages/ThemeMain';
 
 
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
@@ -27,7 +27,7 @@ createInertiaApp({
                         <Routes>
                             <Route path="*" element={<App {...props} />} />
                             <Route path="/home" element={<Home.default />} />
-                            <Route path="/group/:groupId" element={<ThemeComponent />} />
+                            <Route path="/group/:groupId" element={<ThemeMain />} />
                             <Route path="/theme/:thmeId" element={<ThreadComponent />} />
                         </Routes>
                     </Router>
