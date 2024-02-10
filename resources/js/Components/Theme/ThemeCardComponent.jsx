@@ -1,5 +1,5 @@
-import React from 'react'
-import styled from 'styled-components'
+import React from 'react';
+import styled from 'styled-components';
 
 const ThemeCardContainer = styled.div`
     display:flex;
@@ -15,14 +15,17 @@ const CardCotainer = styled.div`
     padding:5%;
     background-color:white;
 `;
-const ThemeCardComponent = () => {
+
+const ThemeCardComponent = ({ groupId }) => {
+    const id = groupId.groupId // Avoid potential null or undefined error
+    
     return (
-        <ThemeCardContainer>    
-            <CardCotainer>     
-                Card Tittile
+        <ThemeCardContainer>
+            <CardCotainer>
+                Theme Title: {id}
             </CardCotainer>
         </ThemeCardContainer>
-    )
+    );
 }
 
-export default ThemeCardComponent
+export default ThemeCardComponent;

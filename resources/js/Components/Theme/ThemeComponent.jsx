@@ -10,7 +10,7 @@ const ThemeContainer = styled.div`
     gap:3%;
 `;
 
-const ThemeComponent = () => {
+const ThemeComponent = (groupId) => {
     const themeData = [
         { id: 1, /* 他のプロパティ */ },
         { id: 2, /* 他のプロパティ */ },
@@ -20,20 +20,20 @@ const ThemeComponent = () => {
         { id: 6, /* 他のプロパティ */ },
         { id: 7, /* 他のプロパティ */ },
         { id: 8, /* 他のプロパティ */ },
-        { id: 1, /* 他のプロパティ */ },
-        { id: 2, /* 他のプロパティ */ },
-        { id: 3, /* 他のプロパティ */ },
-        { id: 4, /* 他のプロパティ */ },
-        { id: 5, /* 他のプロパティ */ },
-        { id: 6, /* 他のプロパティ */ },
-        { id: 7, /* 他のプロパティ */ },
-        { id: 8, /* 他のプロパティ */ },
+        { id: 9, /* 他のプロパティ */ },
+        { id: 10, /* 他のプロパティ */ },
+        { id: 11, /* 他のプロパティ */ },
+        { id: 12, /* 他のプロパティ */ },
+        { id: 13, /* 他のプロパティ */ },
+        { id: 14, /* 他のプロパティ */ },
+        { id: 15, /* 他のプロパティ */ },
+        { id: 16, /* 他のプロパティ */ },
     ];
 
     return (
         <ThemeContainer>
             {themeData.map((theme) => (
-                <ThemeCardComponent key={theme.id} /* 他のプロパティを渡す */ />
+                <ThemeCardComponent key={theme.id}　groupId={groupId} /* 他のプロパティを渡す */ />
             ))}
         </ThemeContainer>
     );

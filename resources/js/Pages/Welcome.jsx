@@ -51,6 +51,7 @@ const Header = styled.div`
     height:15%;
 `
 export default function Welcome({ auth }) {
+    const groupId = 1;
     return (
         <>
             <Head title="Welcome" />
@@ -87,9 +88,11 @@ export default function Welcome({ auth }) {
                             <GroupComponent />
                         </GroupContainer>
                         <ThemeContainer>
-                            <ThemeComponent />
+                            {/* ThemeComponentにgroupIdを渡す */}
+                            <ThemeComponent groupId={groupId} />
                         </ThemeContainer>
                     </GroupThemeContainer>
+
                 </WelcomeContent>
             </WelcomeContainer>
         </>
