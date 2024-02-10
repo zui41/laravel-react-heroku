@@ -4,12 +4,11 @@ import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
-import { Head, useForm } from '@inertiajs/react';
+import { Head, Link,useForm } from '@inertiajs/react';
 import styled from 'styled-components';
 import axios from 'axios'; // axiosをインポート
 import { setAuth } from '@/Store/authSlice';
 import { useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
 import egister from '../Pages/Auth/Register';
 
@@ -127,7 +126,7 @@ export default function Login({ status, canResetPassword }) {
               パスワードを忘れてしまいましたか？
             </LinkStyled>
           )}
-           <Link key={1}  to={'/home'}> 
+           <Link key={1}  href={'/home'}> 
                 group 
            </Link>
           <Link href={route('register')} className="font-semibold" >
