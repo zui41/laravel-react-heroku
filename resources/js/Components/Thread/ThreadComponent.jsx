@@ -1,43 +1,68 @@
-import React from 'react';
-import ThreadCardComponent from './ThreadCardComponent';
+import React, { useState } from 'react';
 import styled from 'styled-components';
+import ModalComponent from './ModalComponent';
 
-const ThreadContainer = styled.div`
-    display: grid;
-    grid-template-columns: repeat(4, 1fr); /* 3つの列、各列のサイズは1fr（均等な割合） */
+const ThreadCardContainer = styled.div`
+    display: flex;
+    flex-direction: row;
     width: 100%;
     height: 100%;
-    margin-top:5%;
-    gap:3%;
+    color: #333;
+    cursor: pointer;
 `;
 
-const ThreadComponent = () => {
-    const ThreadData = [
-        { id: 1, /* 他のプロパティ */ },
-        { id: 2, /* 他のプロパティ */ },
-        { id: 3, /* 他のプロパティ */ },
-        { id: 4, /* 他のプロパティ */ },
-        { id: 5, /* 他のプロパティ */ },
-        { id: 6, /* 他のプロパティ */ },
-        { id: 7, /* 他のプロパティ */ },
-        { id: 8, /* 他のプロパティ */ },
-        { id: 1, /* 他のプロパティ */ },
-        { id: 2, /* 他のプロパティ */ },
-        { id: 3, /* 他のプロパティ */ },
-        { id: 4, /* 他のプロパティ */ },
-        { id: 5, /* 他のプロパティ */ },
-        { id: 6, /* 他のプロパティ */ },
-        { id: 7, /* 他のプロパティ */ },
-        { id: 8, /* 他のプロパティ */ },
+const CardContainer = styled.div`
+    width: 100%;
+    height: 100%;
+    margin: 5%;
+    background-color: white;
+`;
+
+const ThreadCardComponent = () => {
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [selectedThreadId, setSelectedThreadId] = useState(null);
+    const [selectedThreadContent, setSelectedThreadContent] = useState(null);
+
+    // ダミーデータ
+    const threadData = [
+        { id: 1 , "img":"hogehoge" , "content":"今日は趣味である映画鑑賞に行った"},
+        { id: 2 },
+        { id: 3 },
+        // ... 他のデータ
     ];
 
-    return (
-        <ThreadContainer>
-            {ThreadData.map((Thread) => (
-                <ThreadCardComponent key={Thread.id} /* 他のプロパティを渡す */ />
-            ))}
-        </ThreadContainer>
-    );
-}
+    const openModal = (thread) => {
+        if (thread && thread.id) {
+            setSelectedThreadId(thread.id);
+            setSelectedThreadContent(thread.content)
+            setIsModalOpen(true);
+        }
+    };
 
-export default ThreadComponent;
+    const closeModal = () => {
+        setSelectedThreadId(null);
+        setIsModalOpen(false);
+    };
+
+    return (
+        <>
+           {threadData.map((thread) => (
+                <ThreadCardContainer key={thread.id} onClick={() => openModal(thread)}>
+                    <CardContainer>
+                        Thread {thread.id}
+                    </CardContainer>
+                </ThreadCardContainer>
+            ))}
+
+            {isModalOpen && (
+                <ModalComponent onClose={closeModal}>
+                    <p>Modal Content for Thread {selectedThreadId}</p>
+                    <p>{selectedThreadContent}</p>
+                    <button>リアクション</button>
+                </ModalComponent>
+            )}
+        </>
+    );
+};
+
+export default ThreadCardComponent;

@@ -1,10 +1,15 @@
+// app.js
 import './bootstrap';
 import '../css/app.css';
 import { createRoot } from 'react-dom/client';
 import { createInertiaApp } from '@inertiajs/react';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'; // 追加
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import store from './Store/store'; // Redux storeのインポート
 import ThemeComponent from './Components/Theme/ThemeComponent';
+import ThreadComponent from './Components/Thread/ThreadComponent';
+import Welcome from './Pages/Welcome';
 
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
 
@@ -15,12 +20,16 @@ createInertiaApp({
         const root = createRoot(el);
 
         root.render(
-            <Router>
-                <Routes>
-                    <Route path="/" element={<App {...props} />} />
-                    <Route path="/group/:groupId" element={<ThemeComponent/>} />
-                </Routes>
-            </Router>
+            <Provider store={store}> {/* ReduxのProviderでアプリケーションをラップ */}
+                <Router>
+                    <Routes>
+                        <Route path="/" element={<App {...props} />} />
+                        <Route path="/group" element={<Welcome />} />
+                        <Route path="/group/:groupId" element={<ThemeComponent />} />
+                        <Route path="/theme/:thmeId" element={<ThreadComponent />} />
+                    </Routes>
+                </Router>
+            </Provider>
         );
     },
     progress: {
