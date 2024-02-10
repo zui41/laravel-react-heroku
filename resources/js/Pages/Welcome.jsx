@@ -1,5 +1,4 @@
 import { useEffect , useState} from 'react';
-import Checkbox from '@/Components/Checkbox';
 import GuestLayout from '@/Layouts/GuestLayout';
 import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
@@ -10,8 +9,9 @@ import styled from 'styled-components';
 import axios from 'axios'; // axiosをインポート
 import { setAuth } from '@/Store/authSlice';
 import { useDispatch } from 'react-redux';
+import egister from '../Pages/Auth/Register';
+//import { Link } from 'react-router-dom';
 
-// スタイルドコンポーネント
 const StatusMessage = styled.div`
   margin-bottom: 1rem;
   font-weight: 800; 
@@ -30,21 +30,17 @@ const LinkStyled = styled(Link)`
   font-size: 0.9rem; 
   color: #909090; 
   &:hover {
-    color: black; /* hover:text-gray-900 */
+    color: black; 
   }
   margin-start: 0.5rem; /* ms-2 */
   padding-right :10px
 `;
 
-const PassRem =styled.span`
-  mergin-left: 10px;
-`
 const ButtonContainer = styled.div`
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: space-between;
   margin-top: 1rem;
-  
 `;
 
 const LoginForm = styled.form`
@@ -89,9 +85,7 @@ export default function Login({ status, canResetPassword }) {
   return (
     <GuestLayout>
       <Head title="Log in" />
-
       {status && <StatusMessage>{status}</StatusMessage>}
-
       <LoginForm onSubmit={submit} id='loginForm'>
         {/* Input for Email */}
         <LabelContainer>
@@ -121,17 +115,6 @@ export default function Login({ status, canResetPassword }) {
           />
           <InputError message={errors.password} />
         </LabelContainer>
-
-        {/* Checkbox for Remember Me */}
-        <LabelContainer as="div">
-          <Checkbox
-            name="remember"
-            checked={data.remember}
-            onChange={(e) => setData('remember', e.target.checked)}
-          />
-          <PassRem>パスワードを記憶する。</PassRem>
-        </LabelContainer>
-        
         {/* Login and Forgot Password */}
         <ButtonContainer>
           {canResetPassword && (
@@ -139,6 +122,9 @@ export default function Login({ status, canResetPassword }) {
               パスワードを忘れてしまいましたか？
             </LinkStyled>
           )}
+          <Link href={route('register')} className="font-semibold" >
+              <PrimaryButton>新規登録はこちらから</PrimaryButton>
+          </Link>
           <PrimaryButton disabled={processing}>Log in</PrimaryButton>
         </ButtonContainer>
       </LoginForm>
