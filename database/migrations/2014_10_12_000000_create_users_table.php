@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->boolean('is_admin');
-            $table->string('img_path');
+            $table->string('img_path')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
