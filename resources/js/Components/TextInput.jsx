@@ -1,23 +1,26 @@
+import styled from 'styled-components';
 import { forwardRef, useEffect, useRef } from 'react';
 
-export default forwardRef(function TextInput({ type = 'text', className = '', isFocused = false, ...props }, ref) {
-    const input = ref ? ref : useRef();
+// スタイルドコンポーネントで TextInput を定義
+const StyledInput = styled.input`
+  border-color: #d1d5db; 
+  &:focus {
+    border-color: #6366f1; 
+    ring-color: #6366f1; 
+  }
+  border-radius: 0.375rem; 
+  width: 50%; 
+`;
+
+export default forwardRef(function TextInput({ type = 'text', isFocused = false, ...props }, ref) {
+    const inputRef = ref ?? useRef();
 
     useEffect(() => {
-        if (isFocused) {
-            input.current.focus();
+        if (isFocused && inputRef.current) {
+            inputRef.current.focus();
         }
-    }, []);
+    }, [isFocused, inputRef]);
 
-    return (
-        <input
-            {...props}
-            type={type}
-            className={
-                'border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm ' +
-                className
-            }
-            ref={input}
-        />
-    );
+    // StyledInput コンポーネントを使用してレンダリング
+    return <StyledInput {...props} type={type} ref={inputRef} />;
 });
