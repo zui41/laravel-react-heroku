@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Exception;
+use Illuminate\Support\Facades\Response;
+
 
 class GroupController extends Controller
 {
@@ -15,19 +17,15 @@ class GroupController extends Controller
      * Show all group informations.
      *
      */
-    public function index(): Response
+    public function index(Request $request)
     {
-        try {
-            $groups = Auth::user()->groups()->get();
-            // TODO Postの新しい順にソートしたい
-            // $groups = Auth::user()->groups()->orderBy()->get();
+        // try {
+            $groups = User::findOrFail($request->id)->groups()->get();
 
-            return response()->json($groups, 200);
-        } catch (Exception $e) {
-            Log::error($e);
+            return response()->json(["id" => $groups] , 200);
+        // } catch (Exception $e) {
+        //     Log::error($e);
 
-            return response()->json(404);
-        }
     }
 
     /**

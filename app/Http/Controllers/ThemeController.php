@@ -12,21 +12,16 @@ class ThemeController extends Controller
      * Show all theme informations.
      *
      */
-    public function index(Request $request): Response
+    public function index(Request $request)
     {
-        try {
-            $themes = Theme::where('group_id', $request->group_id)
-                            ->orderBy('created_at', 'desc')->get();
+             $themes = Theme::where('group_id', $request->id)
+                             ->orderBy('created_at', 'desc')->get();
             // TODO Postの新しい順にソートしたい
             // $themes = Theme::where('group_id', $request->group_id)
             //                 ->orderBy('created_at')->get();
-
-            return response()->json($themes, 200);
-        } catch (Exception $e) {
-            Log::error($e);
-
-            return response()->json(404);
-        }
+            return response()->json($themes , 200);
+            // return response()->json($themes, 200);
+        
     }
 
     /**
