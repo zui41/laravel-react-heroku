@@ -42,7 +42,7 @@ Route::post('/login', [AuthController::class, 'login'])->name("api.login");
     });
 
     Route::group(['prefix' => 'post', 'as' => 'post.'], function () {
-        Route::get('/index', [PostController::class, 'index']);
+        Route::post('/index', [PostController::class, 'index']);
         Route::post('/store', [PostController::class, 'store']);
         Route::get('/detail', [PostController::class, 'detail']);
         Route::post('/update', [PostController::class, 'update']);
