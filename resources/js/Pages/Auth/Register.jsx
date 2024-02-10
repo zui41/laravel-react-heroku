@@ -23,7 +23,16 @@ export default function Register() {
     const submit = (e) => {
         e.preventDefault();
 
-        post(route('register'));
+        post(route('api.register')).then(response => {
+            
+            const responseData = response.data;
+            
+            // JSONデータを文字列に変換してアラートに表示
+            alert(JSON.stringify(responseData));
+          
+            // もしくは、コンソールにログを表示
+            console.log(responseData);
+        });  
     };
 
     return (

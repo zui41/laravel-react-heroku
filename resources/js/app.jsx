@@ -23,7 +23,7 @@ createInertiaApp({
             <Provider store={store}> {/* ReduxのProviderでアプリケーションをラップ */}
                 <Router>
                     <Routes>
-                        <Route path="/" element={<App {...props} />} />
+                        <Route path="*" element={<App {...props} />} />
                         <Route path="/group" element={<Welcome />} />
                         <Route path="/group/:groupId" element={<ThemeComponent />} />
                         <Route path="/theme/:thmeId" element={<ThreadComponent />} />
