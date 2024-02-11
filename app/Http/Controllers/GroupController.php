@@ -37,7 +37,7 @@ class GroupController extends Controller
         $img_path = null;
 
         if ($request->file('img')) {
-            $img_path = $request->file('img')->store('group_imgs');
+            $img_path = $request->file('img')->store('/group_imgs','/public');
         }
         
         $group = Group::create([

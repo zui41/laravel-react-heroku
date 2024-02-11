@@ -139,7 +139,7 @@ const FormComponent = ({onClose}) => {
     }, [users]);
     
     return (
-        <FormContainer onSubmit={handleSubmit}>
+        <FormContainer onSubmit={handleSubmit} enctype="multipart/form-data">
             <ModalContent>
                 <LabelInput>
                     <label htmlFor="groupImage">グループ画像:</label>

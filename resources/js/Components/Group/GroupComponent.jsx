@@ -26,11 +26,12 @@ const StyledLink = styled(Link)`
 `;
 
 const GroupComponent = ({ groups }) => {
+   
     return (
         <GroupComponentContainer>
             {groups.map((group) => (
                 <StyledLink key={group.id} to={{ pathname: `/group/${group.id}`, state: { groupId: group.id } }}>
-                    <GroupCardComponent key={group.id} /* 他のプロパティを渡す */ />
+                    <GroupCardComponent key={group.id} path={group.img_path}/* 他のプロパティを渡す */ />
                 </StyledLink>
             ))}
             <GroupCreateModal />
