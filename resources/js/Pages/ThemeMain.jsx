@@ -87,6 +87,7 @@ function ThemeMain() {
         }
         fetchData();
       }, []);
+      
     return (
             <ThemeContainer>
                 <ThemeContent className="sm:justify-center sm:items-center">

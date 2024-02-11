@@ -88,8 +88,7 @@ function Home() {
     return (
             <HomeContainer>
                 <HomeContent className="sm:justify-center sm:items-center">
-                    <Header className="sm:fixed sm:top-0 sm:right-0 p-6 text-end">
-                               
+                    <Header className="sm:fixed sm:top-0 sm:right-0 p-6 text-end">          
                             <Link to='/users/userSetting' >
                                  {user.name}  
                             </Link>   
@@ -98,9 +97,6 @@ function Home() {
                         <GroupContainer>
                             <GroupComponent groups={groups}/>
                         </GroupContainer>
-                        <ThemeContainer>
-                         
-                        </ThemeContainer>
                     </GroupThemeContainer>
                 </HomeContent>
             </HomeContainer>
