@@ -32,29 +32,29 @@ class GroupController extends Controller
      * Store group information.
      *
      */
-    public function store(Request $request): Response
+    public function store(Request $request)
     {
-        try {
-            $img_path = null;
-            if ($request->file('img')) {
-                $img_path = $request->file('img')->store('group_imgs');
-            }
+        $img_path = null;
 
-            $group = Group::create([
-                'name' => $request->name,
-                'img_path' => $img_path,
-            ]);
-
-            $user = Auth::user();
-            $user->groups()->sync($group->id, false);
-
-            return response()->json($group, 201);
-        } catch (Exception $e) {
-            DB::rollback();
-            Log::error($e);
-
-            return response()->json(404);
+        if ($request->file('img')) {
+            $img_path = $request->file('img')->store('group_imgs');
         }
+        
+        $group = Group::create([
+            'name' => $request->name,
+            'img_path' => $img_path,
+        ]);
+        
+        $user = User::find($request->userId);
+        
+        if ($user) {
+            $user->groups()->attach($group->id);
+            return response()->json($group, 201);
+        } else {
+            // Handle the case where the user with the specified userId is not found
+            return response()->json(['error' => 'User not found'], 404);
+        }
+        
     }
 
     /**

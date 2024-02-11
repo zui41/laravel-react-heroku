@@ -29,6 +29,7 @@ Route::post('/login', [AuthController::class, 'login'])->name("api.login");
     Route::post('/logout', [AuthController::class, 'logout']);
 
     Route::group(['prefix' => 'user', 'as' => 'user.'], function () {
+        Route::get('/getAll',[UserController::class, 'getAll']);
         Route::post('/invite', [UserController::class, 'invite']);
         Route::post('/update', [UserController::class, 'update']);
     });

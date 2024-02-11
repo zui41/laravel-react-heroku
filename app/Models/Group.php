@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 class Group extends Model
 {
     use HasFactory;
+    protected $fillable = ['name', 'img_path'];
 
     /**
      * 所属するユーザーを取得

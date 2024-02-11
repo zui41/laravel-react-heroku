@@ -9,6 +9,12 @@ use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
+
+    public function getAll()
+    {
+        $users = User::all();
+        return response()->json($users, 200);
+    }
     /**
      * Invite user to group.
      *
