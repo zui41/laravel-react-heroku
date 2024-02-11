@@ -18,6 +18,7 @@ const ModalContent = styled.div`
     background: white;
     padding: 20px;
     border-radius: 8px;
+    color:#333;
 `;
 
 const ModalComponent = ({ onClose, children }) => {
