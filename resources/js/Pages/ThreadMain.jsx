@@ -63,7 +63,7 @@ function ThreadMain() {
     const location = useLocation();
     const [user, setUser] = useState({}); // useStateを使用
     const [groups , setGroups] = useState([]);
-    const [Threads , setThreads] = useState([]);
+    const [threads , setThreads] = useState([]);
     const [themeId , setThemeId] = useState({id:1});
     // Reduxの非同期更新を待つためにuseEffect内でユーザーを更新
     useEffect(() => {
@@ -99,7 +99,7 @@ function ThreadMain() {
                             <GroupComponent groups={groups}/>
                         </GroupContainer>
                         <HomeContainer>
-                            <ThreadComponent  Threads={Threads}/>
+                            <ThreadComponent  threads={threads}/>
                         </HomeContainer>
                     </GroupThreadContainer>
                 </ThreadContent>

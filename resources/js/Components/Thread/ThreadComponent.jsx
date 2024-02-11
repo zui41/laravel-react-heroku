@@ -2,6 +2,13 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import ModalComponent from './ModalComponent';
 
+const ThreadContainer = styled.div`
+    display:grid;
+    grid-template-columns: repeat(auto-fill, minmax(40%, 1fr));
+    height:30%; 
+    gap: 16px;
+    margin-top:6%; 
+`;
 const ThreadCardContainer = styled.div`
     display: flex;
     flex-direction: row;
@@ -16,20 +23,14 @@ const CardContainer = styled.div`
     height: 100%;
     margin: 5%;
     background-color: white;
+    color:#333;
 `;
 
-const ThreadCardComponent = ({thread}) => {
+const ThreadCardComponent = ({threads}) => {
+
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedThreadId, setSelectedThreadId] = useState(null);
     const [selectedThreadContent, setSelectedThreadContent] = useState(null);
-
-    // ダミーデータ
-    const threadData = [
-        { id: 1 , "img":"hogehoge" , "content":"今日は趣味である映画鑑賞に行った"},
-        { id: 2 },
-        { id: 3 },
-        // ... 他のデータ
-    ];
 
     const openModal = (thread) => {
         if (thread && thread.id) {
@@ -45,11 +46,11 @@ const ThreadCardComponent = ({thread}) => {
     };
 
     return (
-        <>
-           {threadData.map((thread) => (
+        <ThreadContainer>
+           {threads.map((thread) => (
                 <ThreadCardContainer key={thread.id} onClick={() => openModal(thread)}>
                     <CardContainer>
-                        Thread {thread.id}
+                       {thread.content}
                     </CardContainer>
                 </ThreadCardContainer>
             ))}
@@ -61,7 +62,7 @@ const ThreadCardComponent = ({thread}) => {
                     <button>リアクション</button>
                 </ModalComponent>
             )}
-        </>
+        </ThreadContainer>
     );
 };
 
