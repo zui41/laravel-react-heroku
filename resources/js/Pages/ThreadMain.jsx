@@ -46,6 +46,8 @@ const ThreadContent = styled.div`
     flex-direction;row;
     background-color:lightblue;
     align-items: center;
+    justify-content: space-around;
+c
 `;
 
 

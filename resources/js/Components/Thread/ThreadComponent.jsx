@@ -3,12 +3,13 @@ import styled from 'styled-components';
 import ModalComponent from './ModalComponent';
 
 const ThreadContainer = styled.div`
-    display:grid;
+    display: grid;
     grid-template-columns: repeat(auto-fill, minmax(40%, 1fr));
-    height:30%; 
+    height: 30%;
     gap: 16px;
-    margin-top:6%; 
+    margin-top: 6%;
 `;
+
 const ThreadCardContainer = styled.div`
     display: flex;
     flex-direction: row;
@@ -23,11 +24,16 @@ const CardContainer = styled.div`
     height: 100%;
     margin: 5%;
     background-color: white;
-    color:#333;
+    color: #333;
+    box-shadow: 10px 6px 10px 0px rgba(0, 0, 0, 0.45);
+    transition: transform 0.3s ease-in-out; /* Add transition for smooth scaling */
+
+    &:hover {
+        transform: scale(1.1); /* Increase size on hover */
+    }
 `;
 
-const ThreadCardComponent = ({threads}) => {
-
+const ThreadCardComponent = ({ threads }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedThreadId, setSelectedThreadId] = useState(null);
     const [selectedThreadContent, setSelectedThreadContent] = useState(null);
@@ -35,7 +41,7 @@ const ThreadCardComponent = ({threads}) => {
     const openModal = (thread) => {
         if (thread && thread.id) {
             setSelectedThreadId(thread.id);
-            setSelectedThreadContent(thread.content)
+            setSelectedThreadContent(thread.content);
             setIsModalOpen(true);
         }
     };
@@ -47,11 +53,9 @@ const ThreadCardComponent = ({threads}) => {
 
     return (
         <ThreadContainer>
-           {threads.map((thread) => (
+            {threads.map((thread) => (
                 <ThreadCardContainer key={thread.id} onClick={() => openModal(thread)}>
-                    <CardContainer>
-                       {thread.content}
-                    </CardContainer>
+                    <CardContainer>{thread.content}</CardContainer>
                 </ThreadCardContainer>
             ))}
 
