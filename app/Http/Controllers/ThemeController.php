@@ -28,7 +28,7 @@ class ThemeController extends Controller
      * Store theme information.
      *
      */
-    public function store(Request $request): Response
+    public function store(Request $request)
     {
         try {
             $theme = Theme::create([

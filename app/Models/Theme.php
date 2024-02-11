@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Theme extends Model
 {
     use HasFactory;
-
+    protected $fillable = ['group_id' ,'name'];
     /**
      * グループを取得
      * 

@@ -11,6 +11,7 @@ import { setAuth } from '@/Store/authSlice';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from "react-router-dom";
 import { useLocation } from 'react-router-dom';
+import PostComponent from '@/Components/Post/PostComponent';
 
 const GroupThemeContainer = styled.div`
     width: 100%;
@@ -27,7 +28,7 @@ const GroupContainer = styled.div`
 `;
 
 const HomeContainer = styled.div`
-    width: 90%;
+    width: 80%;
     height: 100vh;
     color: white;
     overflow-y: auto;
@@ -48,16 +49,22 @@ const ThemeContent = styled.div`
     z-index: 1;
 `;
 
-const ThemeLink = styled(Link)`
-    font-weight: 600;
-    color: #4a5568;
-    &:hover {
-        color: #2d3748;
-    }
-`;
 
 const Header = styled.div`
+    display:flex;
+    justify-content: right;
+    align-items: flex-start;
     height: 15%;
+    width:100%;
+`;
+
+const PostContainer = styled.div`           
+    color: 333;
+    width:35%;
+`;
+
+const NameContainer = styled.div`
+    margin-top:1%;
 `;
 
 function ThemeMain() {
@@ -87,14 +94,20 @@ function ThemeMain() {
         }
         fetchData();
       }, []);
-      
+
     return (
             <ThemeContainer>
                 <ThemeContent className="sm:justify-center sm:items-center">
                     <Header className="sm:fixed sm:top-0 sm:right-0 p-6 text-end">
                             <div>
+
+                            </div>
+                            <PostContainer>
+                                <PostComponent/>
+                            </PostContainer>  
+                            <NameContainer>
                                 {user.name}
-                            </div>      
+                            </NameContainer>    
                     </Header>
                     <GroupThemeContainer>
                         <GroupContainer>
@@ -103,7 +116,7 @@ function ThemeMain() {
                         <HomeContainer>
                             <ThemeComponent  themes={themes}/>
                         </HomeContainer>
-                    </GroupThemeContainer>
+                    </GroupThemeContainer>        
                 </ThemeContent>
             </ThemeContainer>
     );
