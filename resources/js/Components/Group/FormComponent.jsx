@@ -96,6 +96,7 @@ const FormComponent = ({onClose}) => {
   
           // Handle the response as needed
           console.log(response.data);
+          
       } catch (error) {
           // Handle errors
           console.error(error);
@@ -123,6 +124,19 @@ const FormComponent = ({onClose}) => {
       fetchData();
     }, []);
 
+    useEffect(() => {
+      const fetchGroups = async () => {
+        try {
+            const response = await axios.get('/api/group/index');
+            // Handle the response as needed
+            console.log(response.data);
+        } catch (error) {
+          console.error(error);
+        }
+      };
+  
+      fetchGroups();
+    }, [users]);
     
     return (
         <FormContainer onSubmit={handleSubmit}>

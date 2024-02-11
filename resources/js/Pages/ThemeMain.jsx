@@ -5,7 +5,7 @@ import GroupComponent from '@/Components/Group/GroupComponent';
 import ThemeComponent from '@/Components/Theme/ThemeComponent';
 import store from '@/Store/store';
 import { useLocation } from 'react-router-dom';
-import PostComponent from '@/Components/Post/PostComponent';
+import PostThemeComponent from '@/Components/Post/PostComponent';
 
 const GroupThemeContainer = styled.div`
     width: 100%;
@@ -98,7 +98,7 @@ function ThemeMain() {
                 <Header>
                     <ThemeContent>
                         <PostContainer>
-                            <PostComponent/>
+                            <PostThemeComponent/>
                         </PostContainer>  
                         <NameContainer>
                             {user.name}

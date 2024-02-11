@@ -6,6 +6,7 @@ import ThreadComponent from '@/Components/Thread/ThreadComponent';
 import store from '@/Store/store';
 import { useLocation } from 'react-router-dom';
 import PostComponent from '@/Components/Post/PostComponent';
+import PostThreadComponent from '@/Components/Post/PostThread';
 
 const GroupThreadContainer = styled.div`
     width: 100%;
@@ -95,7 +96,7 @@ function ThreadMain() {
                 <Header>
                     <ThreadContent>
                         <PostContainer>
-                            <PostComponent/>
+                            <PostThreadComponent/>
                         </PostContainer>  
                         <NameContainer>
                             {user.name}

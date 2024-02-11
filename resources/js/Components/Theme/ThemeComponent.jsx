@@ -6,10 +6,10 @@ import { Link } from 'react-router-dom';
 
 const ThemeContainer = styled.div`
     display: grid;
-    width: 70%;
+    width: 50%;
     height: 20%;
     margin-top:5%;
-    gap:3%;
+    gap:10%;
 `;
 
 const ThemeComponent = ({themes}) => {
